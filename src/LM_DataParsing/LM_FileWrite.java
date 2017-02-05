@@ -1,4 +1,4 @@
-package LM_Data;
+package LM_DataParsing;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -9,7 +9,7 @@ import java.util.Arrays;
 /**
  * 
  * @author Myeonguni
- * @since 16.09.30
+ * @since 17.02.05
  * 
  */
 public class LM_FileWrite {
@@ -22,13 +22,14 @@ public class LM_FileWrite {
      * 
      * @param list 추출한 로또 당첨번호 데이터를 담은 ArrayList<String>
      * @throws IOException
-     * 추출한 로또 당첨번호 데이터를 기반으로 1~5등, 꽝 데이터를 추출하여 파일쓰기를 진행함
+     * 추출한 로또 당첨번호 데이터를 기반으로 1~5등, 꽝 데이터를 추출하여 파일쓰기를 진행함<br>
+     * 작성될 파일 포맷 : [당첨결과(학습기준) 1:1번번호 2:2번번호 3:3번번호 4:4번번호 5:5번번호 6:6번번호]
      */
 	public static void FileWrite(ArrayList<String> list) throws IOException {
 		/* 추출한 로또 당첨번호 셋에 따른 loop 진행 */
         for (int l = 1; l <= list.size(); l++) {
         	/* 파일출력을 위한 BufferedWriter 객체 : 각 회차별(리스트 1셋 당 1회차시)*/
-            BufferedWriter br = new BufferedWriter(new FileWriter("D:\\lottoData\\LottoMachineLearningDataSet" + l + ".csv"));
+            BufferedWriter br = new BufferedWriter(new FileWriter("C:\\lottoData\\LottoMachineLearningDataSet" + l + ".csv"));
             String numbers[] = list.get(l-1).split(",");
             int[] numbers2 = new int[numbers.length];
             for (int i = 0; i < numbers2.length; i++) numbers2[i] = Integer.parseInt(numbers[i]);
@@ -57,22 +58,23 @@ public class LM_FileWrite {
                                         Arrays.sort(numbers3);
                                         switch (compare(numbers2, numbers3)) {
                                         case 6: /* 1등일 경우(당첨번호6개 일치) */
-                                            br.write(l + "," + numbers3[0] + "," + numbers3[1] + "," + numbers3[2] + "," + numbers3[3] + "," + numbers3[4] + "," + numbers3[5] + ",1\n");
+                                            br.write("1 " + "1:" + numbers3[0] + " 2:" + numbers3[1] + " 3:" + numbers3[2] + " 4:" + numbers3[3] + " 5:" + numbers3[4] + " 6:" + numbers3[5] + "\n");
                                             break;
-                                        case 5: /* 2등일 경우(당첨번호5개+보너스번호 일치) */
+                                        case 5:
+                                        	/* 2등일 경우(당첨번호5개+보너스번호 일치) */
                                             if (numbers2[6]==numbers3[0] || numbers2[6]==numbers3[1] || numbers2[6]==numbers3[2] || numbers2[6]==numbers3[3] || numbers2[6]==numbers3[4] || numbers2[6]==numbers3[5]) {
-                                                br.write(l + "," + numbers3[0] + "," + numbers3[1] + "," + numbers3[2] + "," + numbers3[3] + "," + numbers3[4] + "," + numbers3[5] + ",2\n");
+                                                br.write("2 " + "1:" + numbers3[0] + " 2:" + numbers3[1] + " 3:" + numbers3[2] + " 4:" + numbers3[3] + " 5:" + numbers3[4] + " 6:" + numbers3[5] + "\n");
                                             } else { /* 3등일 경우(당첨번호5개 일치) */
-                                                br.write(l + "," + numbers3[0] + "," + numbers3[1] + "," + numbers3[2] + "," + numbers3[3] + "," + numbers3[4] + "," + numbers3[5] + ",3\n");
+                                                br.write("3 " + "1:" + numbers3[0] + " 2:" + numbers3[1] + " 3:" + numbers3[2] + " 4:" + numbers3[3] + " 5:" + numbers3[4] + " 6:" + numbers3[5] + "\n");
                                             } break;
                                         case 4: /* 4등일 경우(당첨번호4개 일치) */
-                                            br.write(l + "," + numbers3[0] + "," + numbers3[1] + "," + numbers3[2] + "," + numbers3[3] + "," + numbers3[4] + "," + numbers3[5] + ",4\n");
+                                            br.write("4 " + "1:" + numbers3[0] + " 2:" + numbers3[1] + " 3:" + numbers3[2] + " 4:" + numbers3[3] + " 5:" + numbers3[4] + " 6:" + numbers3[5] + "\n");
                                             break;
                                         case 3: /* 5등일 경우(당첨번호3개 일치) */
-                                            br.write(l + "," + numbers3[0] + "," + numbers3[1] + "," + numbers3[2] + "," + numbers3[3] + "," + numbers3[4] + "," + numbers3[5] + ",5\n");
+                                            br.write("5 " + "1:" + numbers3[0] + " 2:" + numbers3[1] + " 3:" + numbers3[2] + " 4:" + numbers3[3] + " 5:" + numbers3[4] + " 6:" + numbers3[5] + "\n");
                                             break;
                                         default: /* 꽝일 경우(당첨번호4개 이상 불일치) */
-                                            br.write((l + 1) + "," + numbers3[0] + "," + numbers3[1] + "," + numbers3[2] + "," + numbers3[3] + "," + numbers3[4] + "," + numbers3[5] + ",6\n");
+                                            br.write("6 " + "1:" + numbers3[0] + " 2:" + numbers3[1] + " 3:" + numbers3[2] + " 4:" + numbers3[3] + " 5:" + numbers3[4] + " 6:" + numbers3[5] + "\n");
                                             break;
                                         }
                                     }

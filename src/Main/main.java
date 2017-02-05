@@ -3,19 +3,19 @@ package Main;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import LM_Data.LM_FileWrite;
-import LM_Data.LM_URLParsing;
+import LM_DataParsing.LM_FileWrite;
+import LM_DataParsing.LM_URLParsing;
 
 /**
  * 
  * @author Myeonguni
- * @since 16.09.30
+ * @since 17.02.05
  * 
  */
 public class main {
 
 	/** 로또 당첨번호를 파싱할 url address **/
-	final static String url = "http://nlotto.co.kr/lotto645Confirm.do?method=byWin&drwNo=";
+	final static String url = "http://www.nlotto.co.kr/gameResult.do?method=byWin&drwNo=";
 	
 	/** 추출할 로또 당첨번호 시작 회차 **/
 	final static int start = 1;

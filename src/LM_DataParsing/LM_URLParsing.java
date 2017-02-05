@@ -1,4 +1,4 @@
-package LM_Data;
+package LM_DataParsing;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 /**
  * 
  * @author Myeonguni
- * @since 16.12.26
+ * @since 17.02.05
  * 
  */
 public class LM_URLParsing {
@@ -18,7 +18,7 @@ public class LM_URLParsing {
  
     /**
      * 
-     * @param url 로또 당첨번호를 파싱할 공식 홈페이지 URL(http://nlotto.co.kr/lotto645Confirm.do?method=byWin&drwNo="회차")
+     * @param url 로또 당첨번호를 파싱할 공식 홈페이지 URL(http://www.nlotto.co.kr/gameResult.do?method=byWin&drwNo="회차")
      * @param start 추출할 당첨번호 시작회
      * @param end 추출할 당첨번호 마지막회
      * @return 로또 start~end회 당첨번호 데이터를 담은 ArrayList<String>
